@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Column from "./Column"
+import { DEFAULT_CARDS } from "../cards";
 
 const Board = () => {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState(DEFAULT_CARDS);
 
   return (
     <div className="flex h-full w-full gap-3 overflow-scroll p-12">
