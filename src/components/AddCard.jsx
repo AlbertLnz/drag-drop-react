@@ -35,13 +35,13 @@ const AddCard = ({ column, setCards }) => {
             <div className="mt-1.5 flex items-center justify-end gap-1.5">
               <button
                 onClick={() => setAdding(false)}
-                className="px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
+                className="px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:text-neutral-50"
               >
                 Close
               </button>
               <button
                 type="submit"
-                className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-xs text-neutral-950 transition-colors hover:bg-neutral-300"
+                className="flex items-center gap-1.5 rounded bg-neutral-50 px-3 py-1.5 text-sm text-neutral-950 transition-colors hover:bg-neutral-300"
               >
                 Add
                 <img src={plus} alt="plus icon" />
@@ -52,7 +52,7 @@ const AddCard = ({ column, setCards }) => {
           : 
           <button
             onClick={() => setAdding(true)}
-            className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-50"
+            className="flex w-full items-center gap-1.5 px-3 py-1.5 text-sm text-neutral-400 transition-colors hover:text-neutral-50"
           >
             <span>Add Card</span>
             <img src={plus} alt="plus icon" />

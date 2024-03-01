@@ -7,7 +7,7 @@ const Board = () => {
   const [cards, setCards] = useState(DEFAULT_CARDS);
 
   return (
-    <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+    <div className="flex h-full w-full gap-x-4 overflow-scroll p-12 justify-center pt-20">
       <Column 
         title="Backlog"
         column="backlog"
