@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Card from "./Card";
 
 const Column = ({ title, headingColor, column, cards, setCards }) => {
   const [active, setActive] = useState(false);
@@ -11,6 +12,11 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
         <span className="rounded text-sm text-neutral-400">{filteredCards.length}</span>
       </div>
       <div className={`h-full w-full transition-colors ${!active ? 'bg-neutral-800/50' : 'bg-neutral-800/0'}`}>
+        {filteredCards.map((card) => {
+          return(
+            <Card key={card.id} {...card}/>
+          )
+        })}
       </div>
     </div>
   )
