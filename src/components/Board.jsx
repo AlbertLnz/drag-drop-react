@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import Column from "./Column"
 import { DEFAULT_CARDS } from "../cards";
 import Trash from './Trash'
+import CleanedUp from "./CleanedUp";
 
 const Board = () => {
   const [cards, setCards] = useState([]);
   const [hasChecked, setHasChecked] = useState(false);
-
+  const [cleaned, setCleaned] = useState(false);
+  
   useEffect(() => {
     hasChecked && localStorage.setItem('cards', JSON.stringify(cards))
   }, [cards, hasChecked])
@@ -14,7 +16,12 @@ const Board = () => {
   useEffect(() => {
     const cardData = localStorage.getItem('cards');
 
-    if (!cardData) {
+    if (cleaned) {
+      localStorage.clear()
+      setCards([])
+      setCleaned(false)
+    }
+    else if (!cardData) {
       localStorage.setItem('cards', JSON.stringify(DEFAULT_CARDS));
       setCards(DEFAULT_CARDS);
     } else {
@@ -22,7 +29,7 @@ const Board = () => {
     }
 
     setHasChecked(true);
-  }, [])
+  }, [cleaned])
   
 
   return (
@@ -55,7 +62,10 @@ const Board = () => {
         cards={cards}
         setCards={setCards}
       />
-      <Trash setCards={setCards}/>
+      <section>
+        <Trash setCards={setCards}/>
+        <CleanedUp setCleaned={setCleaned} />
+      </section>
     </div>
   )
 }
