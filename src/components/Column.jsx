@@ -8,6 +8,7 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
   const [active, setActive] = useState(false);
   const filteredCards = cards.filter((card) => card.column === column)
   const assignId = useCardStore((state) => state.assignId);
+  const cardIdStore = useCardStore((state) => state.cardId)
 
   const handleDragStart = (card) => {
     // e.dataTransfer.setData("cardId", card.id) // <-- NOT WORKING!
@@ -27,10 +28,41 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
     setActive(false)
   }
 
-  // Finalize colorize when drag is completed (onDrop):
-  const handleDragEnd = () => {
+  // Finalize colorize when drag is completed (onDrop) & move the card:
+  const handleDragEnd = (e) => {
     clearHiglights()
     setActive(false)
+
+    // const cardId = e.dataTransfer.getData('cardId')
+    const cardId = cardIdStore
+    const indicators = getIndicators()
+    const { element } = getNearestIndicator(e, indicators)
+    const before = element.dataset.before || '-1'
+
+    if(before !== cardId) {
+      let copy = [...cards]
+      let cardToTransfer = copy.find((c) => c.id === cardId)
+      
+      if(!cardToTransfer) return
+
+      cardToTransfer = {...cardToTransfer, column}
+
+      copy = copy.filter((c) => c.id !== cardId)
+
+      const moveToBack = before === '-1'
+
+      if(moveToBack) {
+        copy.push(cardToTransfer)
+      } else {
+        const insertAtIndex = copy.findIndex((el) => el.id === before)
+       
+        if(insertAtIndex === undefined) return
+
+        copy.splice(insertAtIndex, 0, cardToTransfer)
+      }
+
+      setCards(copy)
+    }
   }
 
   // Higlight the indicator
