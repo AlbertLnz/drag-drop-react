@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Column from "./Column"
 import { DEFAULT_CARDS } from "../cards";
+import Trash from './Trash'
 
 const Board = () => {
   const [cards, setCards] = useState(DEFAULT_CARDS);
@@ -35,6 +36,7 @@ const Board = () => {
         cards={cards}
         setCards={setCards}
       />
+      <Trash setCards={setCards}/>
     </div>
   )
 }
