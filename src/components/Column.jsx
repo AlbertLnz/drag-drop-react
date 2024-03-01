@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Card from "./Card";
+import DropIndicator from "./DropIndicator";
 
 const Column = ({ title, headingColor, column, cards, setCards }) => {
   const [active, setActive] = useState(false);
@@ -17,6 +18,7 @@ const Column = ({ title, headingColor, column, cards, setCards }) => {
             <Card key={card.id} {...card}/>
           )
         })}
+        <DropIndicator beforeId="-1" column={column} />
       </div>
     </div>
   )
